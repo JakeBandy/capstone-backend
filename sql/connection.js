@@ -1,5 +1,7 @@
 const mysql = require("mysql");
+require("dotenv").config();
 
+const { USERNAME, PASSWORD, HOST } = process.env;
 class Connection {
   constructor() {
     if (!this.pool) {
