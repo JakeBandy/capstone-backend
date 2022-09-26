@@ -6,9 +6,9 @@ class Connection {
       console.log("creating connection pool...");
       this.pool = mysql.createPool({
         connectionLimit: 100,
-        host: "capstone-db.crhitog4yyue.us-east-1.rds.amazonaws.com",
-        user: "admin",
-        password: "Jakers3737",
+        host: HOST,
+        user: USERNAME,
+        password: PASSWORD,
         database: "users",
       });
 
