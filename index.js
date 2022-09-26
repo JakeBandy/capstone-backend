@@ -13,6 +13,10 @@ app.use(express.json());
 app.use("/customers", customRoutes);
 app.use("/trades", tradeRoutes);
 
+app.get("/", (req, res) => {
+  res.send("Hello from node!");
+});
+
 app.get("/customers", (req, res) => {
    res.json(user);
  });
@@ -55,7 +59,7 @@ app.delete ("/customers/:id", (req, res) => {
 
   const { body } = req;
 
-  let newUser = {
+     newUser = {
     ...user,
     ...body,
   };
