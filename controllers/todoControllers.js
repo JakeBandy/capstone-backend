@@ -2,7 +2,7 @@ const pool = require("../sql/connection");
 const mysql = require("mysql");
 
 const list = (req, res) => {
-  pool.query("SELECT * FROM customers", (err, rows) => {
+  pool.query("SELECT * FROM todos", (err, rows) => {
     if (err) {
       console.log({ message: "Error occurred: " + err });
       return res.status(500).send("An unexpected error occurred");
@@ -13,7 +13,7 @@ const list = (req, res) => {
 
 const show = (req, res) => {
   pool.query(
-    `SELECT * FROM customers WHERE id = ${req.params.id}`,
+    `SELECT * FROM todos WHERE id = ${req.params.id}`,
     (err, row) => {
       if (err) {
         console.log({ message: "Error occurred: " + err });
@@ -24,33 +24,13 @@ const show = (req, res) => {
   );
 };
 
-const showTradesByCustomer = (req, res) => {
-  pool.query(
-    `SELECT 
-      customers.id, 
-      customers.first_name, 
-      trades.title 
-    FROM trades 
-      JOIN customers 
-      WHERE trades.user_id = ${req.params.id} 
-      AND
-      customers.id = ${req.params.id}`,
-    (err, row) => {
-      if (err) {
-        console.log({ message: "Error occurred: " + err });
-        return res.status(500).send("An unexpected error occurred");
-      }
-      res.json(row);
-    }
-  );
-};
 
 const create = (req, res) => {
-  const { first_name, last_name, email } = req.body;
+  const { text } = req.body;
 
   pool.query(
-    `INSERT INTO customers (first_name, last_name, email) 
-      VALUES ("${first_name}","${last_name}", "${email}")`,
+    `INSERT INTO todos (text_todo) 
+      VALUES ("${text_todo}")`,
     (err, row) => {
       if (err) {
         console.log({ message: "Error occurred: " + err });
@@ -63,7 +43,7 @@ const create = (req, res) => {
 
 const update = (req, res) => {
   let sql = "UPDATE ?? SET ? WHERE ?? = ?";
-  sql = mysql.format(sql, ["customers", req.body, "id", req.params.id]);
+  sql = mysql.format(sql, ["todos", req.body, "id", req.params.id]);
   pool.query(sql, (err, row) => {
     if (err) {
       console.log({ message: "Error occurred: " + err });
@@ -75,7 +55,7 @@ const update = (req, res) => {
 
 const remove = (req, res) => {
   pool.query(
-    `DELETE FROM customers WHERE id = ${req.params.id}`,
+    `DELETE FROM todos WHERE id = ${req.params.id}`,
     (err, row) => {
       if (err) {
         console.log({ message: "Error occurred: " + err });
@@ -92,5 +72,4 @@ module.exports = {
   create,
   update,
   remove,
-  showTradesByCustomer,
 };
