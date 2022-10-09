@@ -11,7 +11,7 @@ class Connection {
         host: HOST,
         user: USERNAME,
         password: PASSWORD,
-        database: "users",
+        database: "todos",
       });
 
       return this.pool;

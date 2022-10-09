@@ -1,19 +1,17 @@
 const express = require("express");
-const router = express.Router();
-const {
+const router = express.Router(); 
+const{
   list,
   show,
   create,
   update,
   remove,
-  showTradesByCustomer,
-} = require("../controllers/customerControllers");
+} = require("../controllers/todoControllers");
 
-router.get("/", list);
-router.get("/:id", show);
-router.get("/:id/trades", showTradesByCustomer);
-router.post("/", create);
-router.put("/:id", update);
-router.delete("/:id", remove);
+router.get("/todos", list);
+router.get("/todos/:id", show);
+router.post("/todos", create);
+router.put("/todos/:id", update);
+router.delete("/todos/:id", remove);
 
 module.exports = router;
