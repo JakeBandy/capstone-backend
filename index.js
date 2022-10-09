@@ -10,8 +10,10 @@ app.use(express.json());
 app.use("/todos", todoRoutes);
 
 app.get("/", (req, res) => {
-  res.send("Hello from Node!");
+  res.send(todoRoutes);
 });
+
+
 
 app.listen(PORT, () =>
   console.log(`I am listening on port http://localhost:${PORT}`)
