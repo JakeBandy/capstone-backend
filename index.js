@@ -10,7 +10,7 @@ app.use(express.json());
 app.use("/todos", todoRoutes);
 
 app.get("/", (req, res) => {
-  res.send("Hello from Node");
+  res.send("Hello from Node!");
 });
 
 app.listen(PORT, () =>
